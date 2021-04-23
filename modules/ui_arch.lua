@@ -20,27 +20,6 @@
 
 UI_ARCH = { }
 
-UI_ARCH.SIZES =
-{
-  "epi",     _("Episodic"),
-  "prog",    _("Progressive"),
-  "mixed",   _("Mix It Up"),
-
-  -- this is a separator (not a usable choice)
-  "_",       "_",
-
-  "micro",    _("Microscopic"),
-  "mini",     _("Miniscule"),
-  "tiny",     _("Tiny"),
-  "small",    _("Small"),
-  "average",  _("Average"),
-  "large",    _("Large"),
-  "huge",     _("Huge"),
-  "colossal", _("Colossal"),
-  "gargan",   _("Gargantuan"),
-  "trans",    _("Transcendent")
-}
-
 UI_ARCH.ABSURDITY_CHOICES =
 {
   "none", _("NONE"),
@@ -66,12 +45,6 @@ UI_ARCH.ZDOOM_SKYBOX_CHOICES =
   "random",   _("Random"),
   "generic",  _("Generic"),
   "disable",  _("Disable")
-}
-
-UI_ARCH.YES_NO =
-{
-  "yes", _("Yes"),
-  "no",  _("No")
 }
 
 UI_ARCH.PROC_GOTCHA_CHOICES =
@@ -124,10 +97,20 @@ OB_MODULES["ui_arch"] =
 
   options =
   {
-    { name="size", label=_("Level Size"), choices=UI_ARCH.SIZES,  default="epi",
+    { 
+      name="float_size", 
+      label=_("Level Size"),
+      valuator = "slider",
+      units = "",
+      min = 7,
+      num_min = 10,
+      max = 75,
+      increment = 1,
+      default = 7,
+      nan= "Progressive;Episodic;Mix It Up;",
       tooltip = "WARNING! If you are planning to play on any choices that involve maps " ..
-      "at sizes of Huge and above, Autodetail is required on. (on by default if you do not have " ..
-      "Prefab Control module on. The stability of maps with sizes Colossal and beyond is not predictable."
+      "at sizes of 50 and above, Autodetail is required on. (on by default if you do not have " ..
+      "Prefab Control module on. The stability of maps with sizes 60 and beyond is not predictable."
     },
 
     {
@@ -169,9 +152,10 @@ OB_MODULES["ui_arch"] =
     { name="steepness",    label=_("Steepness"),  choices=STYLE_CHOICES, gap=1 },
 
     {
-      name="prebuilt_levels",
+      name="bool_prebuilt_levels",
       label=_("Prebuilt Levels"),
-      choices=UI_ARCH.YES_NO,
+      valuator = "button",
+      default = 1,
       tooltip = "Enable or disable prebuilt maps. When disabled, are replaced with generated maps instead."
     },
 
